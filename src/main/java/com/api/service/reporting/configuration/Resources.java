@@ -12,4 +12,18 @@ public class Resources {
     @Setter
     @Getter
     private String loginApiUrl;
+
+
+    @Value("${reportApiUrl}")
+    @Setter
+    @Getter
+    private String reportApiUrl;
+
+
+
+    @Value("${transactionApiUrl}")
+    @Setter
+    @Getter
+    private String transactionApiUrl;
+
 }
