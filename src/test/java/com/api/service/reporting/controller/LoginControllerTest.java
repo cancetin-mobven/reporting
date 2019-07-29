@@ -28,46 +28,41 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 
 // @ContextConfiguration(classes = {AppConfig.class})
-    @WebAppConfiguration
-    @ExtendWith({SpringExtension.class, MockitoExtension.class})
-    @RunWith(MockitoJUnitRunner.class)
-    @WebMvcTest(LoginController.class)
+@WebAppConfiguration
+@ExtendWith({SpringExtension.class, MockitoExtension.class})
+@RunWith(MockitoJUnitRunner.class)
+@WebMvcTest(LoginController.class)
 public class LoginControllerTest {
 
-        @InjectMocks
-        private LoginController loginController;
+    @InjectMocks
+    private LoginController loginController;
 
-        @Mock
-        LoginServiceImpl loginService;
-    /*
-            @Before
-            public void setup() {
-                MockitoAnnotations.initMocks(this);
-            }
-    */
-@Autowired
-private MockMvc mockMvc;
+    @Mock
+    LoginServiceImpl loginService;
 
-        @Test
-        public void shouldListAccountByClient() {
-            HttpServletRequest  mockedRequest = mock(HttpServletRequest.class);
-            LoginRequest loginRequest = new LoginRequest();
-            loginRequest.setPassword("s");
-            loginRequest.setEmail("sdfsd");
-            when(loginService.getUserToken(loginRequest)).thenReturn(Optional.empty());
-            loginController.saveAddress(loginRequest ,mockedRequest);
-            verify(loginService, Mockito.times(1)).getUserToken(loginRequest);
-        }
+    @Autowired
+    private MockMvc mockMvc;
 
-       @Test
-       public void shouldListAccountByClients() {
-           HttpServletRequest  mockedRequest = mock(HttpServletRequest.class);
-           LoginRequest loginRequest = new LoginRequest();
-           loginRequest.setPassword(null);
-           loginRequest.setEmail("");
-           when(loginService.getUserToken(loginRequest)).thenReturn(Optional.empty());
-           loginController.saveAddress(loginRequest ,mockedRequest);
-           verify(loginService, Mockito.times(1)).getUserToken(loginRequest);
-       }
+    @Test
+    public void shouldListAccountByClient() {
+        HttpServletRequest mockedRequest = mock(HttpServletRequest.class);
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setPassword("s");
+        loginRequest.setEmail("sdfsd");
+        when(loginService.getUserToken(loginRequest)).thenReturn(Optional.empty());
+        loginController.saveAddress(loginRequest, mockedRequest);
+        verify(loginService, Mockito.times(1)).getUserToken(loginRequest);
+    }
 
-   }
+    @Test
+    public void shouldListAccountByClients() {
+        HttpServletRequest mockedRequest = mock(HttpServletRequest.class);
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setPassword(null);
+        loginRequest.setEmail("");
+        when(loginService.getUserToken(loginRequest)).thenReturn(Optional.empty());
+        loginController.saveAddress(loginRequest, mockedRequest);
+        verify(loginService, Mockito.times(1)).getUserToken(loginRequest);
+    }
+
+}
