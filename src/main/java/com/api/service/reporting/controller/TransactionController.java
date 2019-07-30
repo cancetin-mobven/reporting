@@ -28,6 +28,10 @@ public class TransactionController {
             @RequestHeader(name = "Authorization", required = false) String accessToken,
             @RequestBody @Valid TransactionRequest transactionRequest, HttpServletRequest request) {
 
+        if(accessToken == null || transactionRequest == null){
+            return new ResponseEntity(new InternalErrorException("Not a valid request! ", HttpStatus.FORBIDDEN), HttpStatus.FORBIDDEN);
+        }
+
         System.out.println(accessToken);
         System.out.println(transactionRequest.getToDate());
         System.out.println(transactionRequest.getFromDate());

@@ -75,16 +75,11 @@ public class ReportControllerTest {
         reportRequest.setMerchant(1);
         ReportResponse reportResponse = ReportResponse.builder().status("Approved").build();
         String token = null;
-
         when(reportService.getReport(token,reportRequest)).thenReturn(Optional.of(reportResponse));
 
-        try {
-            ResponseEntity<ReportResponse> reportEntityResponse = reportController.getReport(token, reportRequest, mockedRequest);
-            fail("Should of thrown an IllegalArgumentException");
-        }catch (Exception e){
-            //expected behaviour
-        }
+        ResponseEntity<ReportResponse> reportEntityResponse = reportController.getReport(token, reportRequest, mockedRequest);
 
+        assertEquals(reportEntityResponse.getStatusCode().value(),HttpStatus.FORBIDDEN.value());
     }
 
 
