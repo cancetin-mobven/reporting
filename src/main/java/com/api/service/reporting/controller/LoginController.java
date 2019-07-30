@@ -24,7 +24,7 @@ public class LoginController {
 
     @RequestMapping(value = "/api", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<TokenResponse> saveAddress(@RequestBody @Valid LoginRequest loginRequest, HttpServletRequest request) {
+    public ResponseEntity<TokenResponse> login(@RequestBody @Valid LoginRequest loginRequest, HttpServletRequest request) {
 
         return loginServiceImpl.getUserToken(loginRequest)
                 .map(authToken -> new ResponseEntity<>(authToken, HttpStatus.OK))

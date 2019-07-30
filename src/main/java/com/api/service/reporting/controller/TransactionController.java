@@ -19,7 +19,6 @@ import javax.validation.Valid;
 @Slf4j
 public class TransactionController {
 
-
     @Autowired
     TransactionListImpl transactionServiceImpl;
 
@@ -27,14 +26,13 @@ public class TransactionController {
     @ResponseBody
     public ResponseEntity<TransactionListResponse> getReport(
             @RequestHeader(name = "Authorization", required = false) String accessToken,
-            @RequestBody @Valid ReportRequest reportRequest, HttpServletRequest request) {
-
+            @RequestBody @Valid TransactionRequest transactionRequest, HttpServletRequest request) {
 
         System.out.println(accessToken);
-        System.out.println(reportRequest.getToDate());
-        System.out.println(reportRequest.getFromDate());
+        System.out.println(transactionRequest.getToDate());
+        System.out.println(transactionRequest.getFromDate());
 
-        return  transactionServiceImpl.getReport(accessToken,reportRequest)
+        return  transactionServiceImpl.getReport(accessToken,transactionRequest)
                 .map(report -> new ResponseEntity<>(report, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity(new InternalErrorException("Internal error during getting access token", HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR));
 
@@ -45,15 +43,11 @@ public class TransactionController {
 */
     }
 
-
-
     @RequestMapping(value = "/apii", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<TransactionListResponse> getReports(
             @RequestHeader(name = "Authorization", required = false) String accessToken,
             @RequestBody @Valid TransactionListResponse transactionListResponse, HttpServletRequest request) {
-
-
 
         return null;
 

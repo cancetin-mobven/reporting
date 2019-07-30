@@ -34,10 +34,10 @@ public class ReportController {
             @RequestHeader(name = "Authorization", required = false) String accessToken,
             @RequestBody @Valid ReportRequest reportRequest, HttpServletRequest request) {
 
+        if(accessToken == null && accessToken.equals("") || reportRequest == null){
+           return new ResponseEntity(new InternalErrorException("Not valid request! ", HttpStatus.BAD_REQUEST), HttpStatus.BAD_REQUEST);
+        }
 
-        System.out.println(accessToken);
-        System.out.println(reportRequest.getToDate());
-        System.out.println(reportRequest.getFromDate());
 
         return  reportServiceImpL.getReport(accessToken,reportRequest)
                 .map(report -> new ResponseEntity<>(report, HttpStatus.OK))

@@ -2,6 +2,7 @@ package com.api.service.reporting.service.impl;
 
 import com.api.service.reporting.configuration.Resources;
 import com.api.service.reporting.model.ReportRequest;
+import com.api.service.reporting.model.TransactionRequest;
 import com.api.service.reporting.model.transaction.TransactionListResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,20 +28,17 @@ public class TransactionListImpl {
     @Autowired
     private Resources resources;
 
-    public Optional<TransactionListResponse> getReport(String accessToken, ReportRequest reportRequest) {
+    public Optional<TransactionListResponse> getReport(String accessToken, TransactionRequest transactionRequest ) {
 
         Gson gson = new GsonBuilder().serializeNulls().create();
-        String reportReq = gson.toJson(reportRequest);
+        String reportReq = gson.toJson(transactionRequest);
 
-        System.out.println("asddssssssss    "+reportReq);
         HttpHeaders head=createHeaders(accessToken);
         head.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>(reportReq, head);
 
-        System.out.println("bbbbb");
-
         TransactionListResponse reportResponse = null;
-        try {System.out.println("bbbbbcccc");
+        try {
 
             ResponseEntity<String> response = restTemplate.postForEntity(resources.getTransactionApiUrl(), entity, String.class);
             System.out.println("sssss");

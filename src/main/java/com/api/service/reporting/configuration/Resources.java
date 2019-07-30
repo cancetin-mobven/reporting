@@ -13,17 +13,25 @@ public class Resources {
     @Getter
     private String loginApiUrl;
 
-
     @Value("${reportApiUrl}")
     @Setter
     @Getter
     private String reportApiUrl;
 
-
-
     @Value("${transactionApiUrl}")
     @Setter
     @Getter
     private String transactionApiUrl;
+
+
+    @Value("${transactionQueryApiUrl}")
+    @Setter
+    @Getter
+    private String transactionQueryApiUrl;
+
+    @Value("${transactionQueryApiUrl}")
+    @Setter
+    @Getter
+    private String clientQueryApiUrl;
 
 }

@@ -1,5 +1,6 @@
 package com.api.service.reporting.model.transaction;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransactionMerchant {
             String referenceNo; //": "trn-test-seck-1",
     String         status ;//": "ERROR",
@@ -23,7 +25,15 @@ public class TransactionMerchant {
                    String message ;// "message": "Invalid Merchant",
                     String transactionId ;//": "1011028-1539357144-1293"
 
-
+    private Long merchantId;
+    private String channel;
+    private String chainId;
+    private Long agentInfoId;
+    private String updated_at;
+    private Long id;
+    private Long fxTransactionId;
+    private Long acquirerTransactionId;
+    private String code;
 
 
 }
