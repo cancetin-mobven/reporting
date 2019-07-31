@@ -41,12 +41,9 @@ public class TransactionListImpl {
         try {
 
             ResponseEntity<String> response = restTemplate.postForEntity(resources.getTransactionApiUrl(), entity, String.class);
-            System.out.println("sssss");
-            System.out.println(response);
-            if(response.getStatusCode()== HttpStatus.OK) {
-                System.out.println("ddfdf  " + response.getBody());
-                Gson g = new Gson();
-                reportResponse = g.fromJson(response.getBody(), TransactionListResponse.class);
+             if(response.getStatusCode()== HttpStatus.OK) {
+                 Gson g = new Gson();
+                 reportResponse = g.fromJson(response.getBody(), TransactionListResponse.class);
             } else return Optional.empty();
 
         }catch (HttpClientErrorException e){ //4XX

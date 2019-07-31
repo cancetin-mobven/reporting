@@ -41,23 +41,19 @@ public class ReportServiceImpl implements ReportService {
         Gson gson = new GsonBuilder().serializeNulls().create();
         String reportReq = gson.toJson(reportRequest);
 
-        System.out.println("asddssssssss    "+reportReq);
         HttpHeaders head=createHeaders(accessToken);
         head.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>(reportReq, head);
 
-        System.out.println("bbbbb");
-
         ReportResponse reportResponse = null;
-        try {System.out.println("bbbbbcccc");
+        try {
 
             ResponseEntity<String> response = restTemplate.postForEntity(resources.getReportApiUrl(), entity, String.class);
-            System.out.println("sssss");
-            System.out.println(response);
+
             if(response.getStatusCode()==HttpStatus.OK) {
-                System.out.println("ddfdf  " + response.getBody());
                 Gson g = new Gson();
                 reportResponse = g.fromJson(response.getBody(), ReportResponse.class);
+
             } else return Optional.empty();
 
         }catch (HttpClientErrorException e){ //4XX
@@ -70,27 +66,6 @@ public class ReportServiceImpl implements ReportService {
             logger.error(exc.getMessage());
             return Optional.empty();
         }
-/*
-        MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
-        headers.add("Authorization", accessToken);
-        headers.add("Content-Type", "application/json");
-
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-
-        HttpEntity<ReportRequest> request = new HttpEntity<ReportRequest>(reportRequest, headers);
-
-        String reportResponses = restTemplate.postForObject(resources.getReportApiUrl(), request, String.class);
-        System.out.println(reportResponses);
-*/
-
-
-
-     /*
-        MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
-        map.add("email", loginRequest.getEmail());
-        map.add("password", loginRequest.getPassword())
-     */
 
         return Optional.of(reportResponse);
     }

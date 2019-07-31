@@ -23,7 +23,6 @@ public class Resources {
     @Getter
     private String transactionApiUrl;
 
-
     @Value("${transactionQueryApiUrl}")
     @Setter
     @Getter

@@ -31,11 +31,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Optional<TokenResponse> getUserToken(LoginRequest loginRequest) {
-        System.out.println(resources.getLoginApiUrl());
-        System.out.println(restTemplate);
-        System.out.println(loginRequest.getPassword());
-        System.out.println(loginRequest.getEmail());
-        //headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -46,7 +41,7 @@ public class LoginServiceImpl implements LoginService {
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
         TokenResponse tokenResponse ;
-        try {
+                try {
             response = restTemplate.postForEntity(resources.getLoginApiUrl(), request, String.class);
             Gson g = new Gson();
             tokenResponse = g.fromJson(response.getBody(), TokenResponse.class);

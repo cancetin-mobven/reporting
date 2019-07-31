@@ -32,28 +32,11 @@ public class TransactionController {
             return new ResponseEntity(new InternalErrorException("Not a valid request! ", HttpStatus.FORBIDDEN), HttpStatus.FORBIDDEN);
         }
 
-        System.out.println(accessToken);
-        System.out.println(transactionRequest.getToDate());
-        System.out.println(transactionRequest.getFromDate());
-
         return  transactionServiceImpl.getReport(accessToken,transactionRequest)
                 .map(report -> new ResponseEntity<>(report, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity(new InternalErrorException("Internal error during getting access token", HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR));
 
 
-    /*    return  transactionServiceImpl.getReport(accessToken,reportRequest)
-                .map(report -> new ResponseEntity<>(report, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity(new InternalErrorException("Internal error during getting access token", HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR));
-*/
     }
 
-    @RequestMapping(value = "/apii", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<TransactionListResponse> getReports(
-            @RequestHeader(name = "Authorization", required = false) String accessToken,
-            @RequestBody @Valid TransactionListResponse transactionListResponse, HttpServletRequest request) {
-
-        return null;
-
-    }
 }

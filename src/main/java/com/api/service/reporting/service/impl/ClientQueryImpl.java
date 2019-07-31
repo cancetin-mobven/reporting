@@ -43,17 +43,22 @@ public class ClientQueryImpl {
         try {
 
             ResponseEntity<String> response = restTemplate.postForEntity(resources.getClientQueryApiUrl(), entity, String.class);
+            System.out.println("response");
             if(response.getStatusCode()== HttpStatus.OK) {
                 Gson g = new Gson();
                 reportResponse = g.fromJson(response.getBody(), ClientQueryResponse.class);
-            } else return Optional.empty();
+            } else {
+                System.out.println("sdsdzsdzs");
+                return Optional.empty();
+            }
 
         }catch (HttpClientErrorException e){ //4XX
+            System.out.println("sdsdzsdzsfffffff");
             logger.error(e.getMessage());
-            return Optional.of( ClientQueryResponse.builder().build());
+            return Optional.empty();
         }catch (HttpServerErrorException ex){ //5XX
             logger.error(ex.getMessage());
-            return Optional.of( ClientQueryResponse.builder().build());
+            return Optional.empty();
         }catch (Exception exc){
             logger.error(exc.getMessage());
             return Optional.empty();

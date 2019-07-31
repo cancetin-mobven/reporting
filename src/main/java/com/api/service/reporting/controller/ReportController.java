@@ -38,15 +38,9 @@ public class ReportController {
            return new ResponseEntity(new InternalErrorException("Not a valid request! ", HttpStatus.FORBIDDEN), HttpStatus.FORBIDDEN);
         }
 
-
         return  reportServiceImpL.getReport(accessToken,reportRequest)
                 .map(report -> new ResponseEntity<>(report, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity(new InternalErrorException("Internal error during getting access token", HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR));
 
-
-    /*    return  transactionServiceImpl.getReport(accessToken,reportRequest)
-                .map(report -> new ResponseEntity<>(report, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity(new InternalErrorException("Internal error during getting access token", HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR));
-*/
     }
 }

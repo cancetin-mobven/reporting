@@ -34,6 +34,7 @@ public class TransactionQueryImpl implements TransactionQueryService {
         String reportReq = gson.toJson(transactionQueryRequest);
 
         HttpHeaders head=createHeaders(accessToken);
+
         head.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>(reportReq, head);
 
@@ -42,8 +43,7 @@ public class TransactionQueryImpl implements TransactionQueryService {
 
             ResponseEntity<String> response = restTemplate.postForEntity(resources.getTransactionQueryApiUrl(), entity, String.class);
             if(response.getStatusCode()== HttpStatus.OK) {
-                System.out.println("ddfdf  " + response.getBody());
-                Gson g = new Gson();
+                 Gson g = new Gson();
                 reportResponse = g.fromJson(response.getBody(), TransactionQueryResponse.class);
             } else return Optional.empty();
 
@@ -59,6 +59,7 @@ public class TransactionQueryImpl implements TransactionQueryService {
         }
         return Optional.of(reportResponse);
     }
+
 
     HttpHeaders createHeaders(String accessToken){
         return new HttpHeaders() {{
