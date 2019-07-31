@@ -2,17 +2,12 @@ package com.api.service.reporting.controller;
 
 import com.api.service.reporting.configuration.Resources;
 import com.api.service.reporting.model.ClientQueryRequest;
-import com.api.service.reporting.model.TransactionQueryRequest;
 import com.api.service.reporting.model.clientQuery.ClientQueryResponse;
 import com.api.service.reporting.model.transaction.CustomerInfo;
-import com.api.service.reporting.model.transaction.Merchant;
-import com.api.service.reporting.model.transactionQuery.TransactionQueryResponse;
 import com.api.service.reporting.service.impl.ClientQueryImpl;
-import com.api.service.reporting.service.impl.TransactionQueryImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;

@@ -1,6 +1,5 @@
 package com.api.service.reporting.model;
 
-
 import lombok.*;
 
 @Getter

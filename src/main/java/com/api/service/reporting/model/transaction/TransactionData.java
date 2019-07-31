@@ -14,8 +14,7 @@ public class TransactionData {
 
     String updated_at;
     String created_at;
-
-
+    
     Boolean refundable;
 
     Fx fx;

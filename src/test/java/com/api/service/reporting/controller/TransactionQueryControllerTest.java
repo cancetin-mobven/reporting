@@ -3,17 +3,12 @@ package com.api.service.reporting.controller;
 
 import com.api.service.reporting.configuration.Resources;
 import com.api.service.reporting.model.TransactionQueryRequest;
-import com.api.service.reporting.model.TransactionRequest;
-import com.api.service.reporting.model.transaction.Fx;
 import com.api.service.reporting.model.transaction.Merchant;
-import com.api.service.reporting.model.transaction.TransactionListResponse;
 import com.api.service.reporting.model.transactionQuery.TransactionQueryResponse;
-import com.api.service.reporting.service.impl.TransactionListImpl;
 import com.api.service.reporting.service.impl.TransactionQueryImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -24,8 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;

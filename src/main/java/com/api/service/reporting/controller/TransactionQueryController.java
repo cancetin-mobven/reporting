@@ -2,10 +2,7 @@ package com.api.service.reporting.controller;
 
 import com.api.service.reporting.exception.InternalErrorException;
 import com.api.service.reporting.model.TransactionQueryRequest;
-import com.api.service.reporting.model.TransactionRequest;
-import com.api.service.reporting.model.transaction.TransactionListResponse;
 import com.api.service.reporting.model.transactionQuery.TransactionQueryResponse;
-import com.api.service.reporting.service.impl.TransactionListImpl;
 import com.api.service.reporting.service.impl.TransactionQueryImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +27,7 @@ public class TransactionQueryController {
             @RequestHeader(name = "Authorization", required = false) String accessToken,
             @RequestBody @Valid TransactionQueryRequest transactionRequest, HttpServletRequest request) {
 
-        return  transactionQueryImpl.getReport(accessToken,transactionRequest)
+        return transactionQueryImpl.getReport(accessToken, transactionRequest)
                 .map(report -> new ResponseEntity<>(report, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity(new InternalErrorException("Internal error during getting access token", HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR));
 

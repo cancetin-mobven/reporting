@@ -11,8 +11,8 @@ import lombok.*;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Merchant {
-    Long  id; // ": 1293,
-    String name ;//": "Seckin Merchant",
-    Boolean  allowPartialRefund;//": true,
-    Boolean   allowPartialCapture; //": true
+    Long  id;
+    String name ;
+    Boolean  allowPartialRefund;
+    Boolean   allowPartialCapture;
 }

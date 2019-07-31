@@ -1,11 +1,8 @@
 package com.api.service.reporting.controller;
 
 import com.api.service.reporting.exception.InternalErrorException;
-import com.api.service.reporting.model.LoginRequest;
 import com.api.service.reporting.model.ReportRequest;
 import com.api.service.reporting.model.ReportResponse;
-import com.api.service.reporting.model.TokenResponse;
-import com.api.service.reporting.service.impl.LoginServiceImpl;
 import com.api.service.reporting.service.impl.ReportServiceImpl;
 import com.api.service.reporting.service.impl.TransactionListImpl;
 import lombok.extern.slf4j.Slf4j;

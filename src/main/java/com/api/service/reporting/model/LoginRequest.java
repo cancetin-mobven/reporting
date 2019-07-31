@@ -15,9 +15,9 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class LoginRequest {
 
-   @NotBlank
-   @NotNull
-   @NotEmpty
+    @NotBlank
+    @NotNull
+    @NotEmpty
     private String email;
 
     @NotBlank

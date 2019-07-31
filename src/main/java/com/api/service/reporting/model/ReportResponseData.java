@@ -12,6 +12,6 @@ public class ReportResponseData {
 
     int count;
     Long total;
-    Currency currency; // ? enum :  String
+    Currency currency;
 
 }

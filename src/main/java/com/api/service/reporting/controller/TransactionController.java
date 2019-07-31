@@ -28,11 +28,11 @@ public class TransactionController {
             @RequestHeader(name = "Authorization", required = false) String accessToken,
             @RequestBody @Valid TransactionRequest transactionRequest, HttpServletRequest request) {
 
-        if(accessToken == null || transactionRequest == null){
+        if (accessToken == null || transactionRequest == null) {
             return new ResponseEntity(new InternalErrorException("Not a valid request! ", HttpStatus.FORBIDDEN), HttpStatus.FORBIDDEN);
         }
 
-        return  transactionServiceImpl.getReport(accessToken,transactionRequest)
+        return transactionServiceImpl.getReport(accessToken, transactionRequest)
                 .map(report -> new ResponseEntity<>(report, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity(new InternalErrorException("Internal error during getting access token", HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR));
 

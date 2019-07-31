@@ -33,7 +33,7 @@ public class TransactionQueryImpl implements TransactionQueryService {
         Gson gson = new GsonBuilder().serializeNulls().create();
         String reportReq = gson.toJson(transactionQueryRequest);
 
-        HttpHeaders head=createHeaders(accessToken);
+        HttpHeaders head = createHeaders(accessToken);
 
         head.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>(reportReq, head);
@@ -42,18 +42,18 @@ public class TransactionQueryImpl implements TransactionQueryService {
         try {
 
             ResponseEntity<String> response = restTemplate.postForEntity(resources.getTransactionQueryApiUrl(), entity, String.class);
-            if(response.getStatusCode()== HttpStatus.OK) {
-                 Gson g = new Gson();
+            if (response.getStatusCode() == HttpStatus.OK) {
+                Gson g = new Gson();
                 reportResponse = g.fromJson(response.getBody(), TransactionQueryResponse.class);
             } else return Optional.empty();
 
-        }catch (HttpClientErrorException e){ //4XX
+        } catch (HttpClientErrorException e) { //4XX
             logger.error(e.getMessage());
-            return  Optional.empty();
-        }catch (HttpServerErrorException ex){ //5XX
+            return Optional.empty();
+        } catch (HttpServerErrorException ex) { //5XX
             logger.error(ex.getMessage());
-            return  Optional.empty();
-        }catch (Exception exc){
+            return Optional.empty();
+        } catch (Exception exc) {
             logger.error(exc.getMessage());
             return Optional.empty();
         }
@@ -61,9 +61,9 @@ public class TransactionQueryImpl implements TransactionQueryService {
     }
 
 
-    HttpHeaders createHeaders(String accessToken){
+    HttpHeaders createHeaders(String accessToken) {
         return new HttpHeaders() {{
-            set( "Authorization", accessToken );
+            set("Authorization", accessToken);
         }};
     }
 

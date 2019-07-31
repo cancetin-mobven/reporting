@@ -1,15 +1,14 @@
 package com.api.service.reporting.controller;
 
 import com.api.service.reporting.configuration.Resources;
-import com.api.service.reporting.model.*;
-import com.api.service.reporting.service.impl.LoginServiceImpl;
+import com.api.service.reporting.model.ReportRequest;
+import com.api.service.reporting.model.ReportResponse;
 import com.api.service.reporting.service.impl.ReportServiceImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +21,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.AssertFalse;
 import java.util.Optional;
 
-import static org.assertj.core.api.Java6Assertions.fail;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
-
-import com.api.service.reporting.model.LoginRequest;
-import com.api.service.reporting.model.TokenResponse;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @WebAppConfiguration
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
@@ -61,10 +56,10 @@ public class ReportControllerTest {
         ReportResponse reportResponse = ReportResponse.builder().status("Approved").build();
         String token = "token";
 
-        when(reportService.getReport(token,reportRequest)).thenReturn(Optional.of(reportResponse));
+        when(reportService.getReport(token, reportRequest)).thenReturn(Optional.of(reportResponse));
         ResponseEntity<ReportResponse> reportEntityResponse = reportController.getReport(token, reportRequest, mockedRequest);
 
-        assertEquals(reportEntityResponse.getBody().getStatus(),reportResponse.getStatus());
+        assertEquals(reportEntityResponse.getBody().getStatus(), reportResponse.getStatus());
 
     }
 
@@ -75,11 +70,11 @@ public class ReportControllerTest {
         reportRequest.setMerchant(1);
         ReportResponse reportResponse = ReportResponse.builder().status("Approved").build();
         String token = null;
-        when(reportService.getReport(token,reportRequest)).thenReturn(Optional.of(reportResponse));
+        when(reportService.getReport(token, reportRequest)).thenReturn(Optional.of(reportResponse));
 
         ResponseEntity<ReportResponse> reportEntityResponse = reportController.getReport(token, reportRequest, mockedRequest);
 
-        assertEquals(reportEntityResponse.getStatusCode().value(),HttpStatus.FORBIDDEN.value());
+        assertEquals(reportEntityResponse.getStatusCode().value(), HttpStatus.FORBIDDEN.value());
     }
 
 

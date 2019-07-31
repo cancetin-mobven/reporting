@@ -2,10 +2,9 @@ package com.api.service.reporting.service.impl;
 
 import com.api.service.reporting.configuration.Resources;
 import com.api.service.reporting.model.ClientQueryRequest;
-import com.api.service.reporting.model.TransactionQueryRequest;
 import com.api.service.reporting.model.clientQuery.ClientQueryResponse;
-import com.api.service.reporting.model.transaction.CustomerInfo;
-import com.api.service.reporting.model.transactionQuery.TransactionQueryResponse;
+
+import com.api.service.reporting.service.ClientQueryService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
@@ -20,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Optional;
 
 @Service
-public class ClientQueryImpl {
+public class ClientQueryImpl implements ClientQueryService {
 
     private final Logger logger = LoggerFactory.getLogger(TransactionQueryImpl.class);
 
@@ -44,31 +43,29 @@ public class ClientQueryImpl {
 
             ResponseEntity<String> response = restTemplate.postForEntity(resources.getClientQueryApiUrl(), entity, String.class);
             System.out.println("response");
-            if(response.getStatusCode()== HttpStatus.OK) {
+            if (response.getStatusCode() == HttpStatus.OK) {
                 Gson g = new Gson();
                 reportResponse = g.fromJson(response.getBody(), ClientQueryResponse.class);
             } else {
-                System.out.println("sdsdzsdzs");
                 return Optional.empty();
             }
 
-        }catch (HttpClientErrorException e){ //4XX
-            System.out.println("sdsdzsdzsfffffff");
+        } catch (HttpClientErrorException e) { //4XX
             logger.error(e.getMessage());
             return Optional.empty();
-        }catch (HttpServerErrorException ex){ //5XX
+        } catch (HttpServerErrorException ex) { //5XX
             logger.error(ex.getMessage());
             return Optional.empty();
-        }catch (Exception exc){
+        } catch (Exception exc) {
             logger.error(exc.getMessage());
             return Optional.empty();
         }
         return Optional.of(reportResponse);
     }
 
-    HttpHeaders createHeaders(String accessToken){
+    HttpHeaders createHeaders(String accessToken) {
         return new HttpHeaders() {{
-            set( "Authorization", accessToken );
+            set("Authorization", accessToken);
         }};
     }
 
